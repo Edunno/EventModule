@@ -87,173 +87,175 @@ function searchForWord($) {
         console.log(x);
     })
 
-/* //Koden herunder er gammel strøm, fra før siden ændrede sig sent i maj.
-    var eventDescriptions = $('h3[class="event-title"]'); //Finder alle <h3> elementer i html'en og lister dem i element typer. Obs.: Hvert element får både sig selv, næste, forrige og udeomliggende element returneret med det (prev, next og parent)
-    var otherDescriptions = $('span[class="notranslate"]'); //Finder alle <span> elementer med class "notranslate". Der er normalt 3 for hver <h3> element.
-    var evLen = eventDescriptions.length;
-    for (var i = 0; i < evLen; i++) {
-        var checkTitle = eventDescriptions[i].children[1].children[0];
-        var title = checkTitle.data ? checkTitle.data : checkTitle.children[0].data;    //Titel
-        var desc = eventDescriptions[i].next.data.replace(/\n/g, "");                   //Beskrivelse
-        var dateOf = otherDescriptions[i * 3].children[0].data;                         //Dato
-        try {
-            var timeOf = otherDescriptions[i * 3 + 1].children[0].data;                     //Tidspunkt
-        }
-        catch {
-            var timeOf = null;
-        }
-        var linkOf = otherDescriptions[i * 3 + 2].children[0].attribs.href;             //Link
-        var place = otherDescriptions[i * 3 + 2].children[0].children[0].data;          //Sted
-        var address = otherDescriptions[i * 3 + 2].children[1].data;                    //Adresse
-
-        //Setting up date format
-        var dateYear = dateOf.slice(dateOf.length - 4, dateOf.length);
-        var dateMonth = getMonth(dateOf.slice(dateOf.indexOf(".") + 2, dateOf.indexOf(".") + 5));
-        var dateDay = dateOf.slice(dateOf.indexOf(".") - 2, dateOf.indexOf("."));
-        var properDate = new Date();
-        properDate.setFullYear(dateYear, dateMonth, dateDay);
-
-        //Setting up time format
-        if (timeOf !== null) {
-            var timeOf = timeOf.slice(2, timeOf.length);
-            var timeTo = 0;
-            var timeFrom = 0;
-            if (timeOf.indexOf("-") !== -1) {
-                timeFrom = timeOf.slice(timeOf.indexOf(".") + 2, timeOf.indexOf("-")).replace(".", "");
-                timeTo = timeOf.slice(timeOf.indexOf("-") + 1, timeOf.length - 1).replace(".", "");
-                timeFrom.length < 3 ? timeFrom += "00" : null;
-                timeTo.length < 3 ? timeTo += "00" : null;
-                console.log(timeFrom)
-                console.log(timeTo)
+    /* //Koden herunder er gammel strøm, fra før siden ændrede sig sent i maj.
+        var eventDescriptions = $('h3[class="event-title"]'); //Finder alle <h3> elementer i html'en og lister dem i element typer. Obs.: Hvert element får både sig selv, næste, forrige og udeomliggende element returneret med det (prev, next og parent)
+        var otherDescriptions = $('span[class="notranslate"]'); //Finder alle <span> elementer med class "notranslate". Der er normalt 3 for hver <h3> element.
+        var evLen = eventDescriptions.length;
+        for (var i = 0; i < evLen; i++) {
+            var checkTitle = eventDescriptions[i].children[1].children[0];
+            var title = checkTitle.data ? checkTitle.data : checkTitle.children[0].data;    //Titel
+            var desc = eventDescriptions[i].next.data.replace(/\n/g, "");                   //Beskrivelse
+            var dateOf = otherDescriptions[i * 3].children[0].data;                         //Dato
+            try {
+                var timeOf = otherDescriptions[i * 3 + 1].children[0].data;                     //Tidspunkt
             }
-        }
-
-
-        //Setting up address format
-        var address = address.slice(2, address.length);
-
-        //Set up a json element with the values in them, then throw them on to "postToApi"
-
-        console.log("-------- New event ---------");
-
-        let eventFull = {
-            "title": title,
-            "address": address,
-            "dateof": dateOf,
-            "timeFrom": timeFrom,
-            "description": desc,
-            "place": place,
-            "link": linkOf
-        }
-            * /
-        //for(var i = 0; i < 10; i++){
-        //setTimeout(postToApi, 800*i);
-        //}
-    }
-
-    function postToApi(event) {
-        /*
-        const options = {
-            url: 'https://manbearpig.dk/api/Event/create',
-            json: true,
-            body: {
-                title: event.title,
-                address: event.address,
-                startday: 111111,
-                starttime: 1111111,
-                description: event.desc,
-                place: event.place
+            catch {
+                var timeOf = null;
             }
-        };
+            var linkOf = otherDescriptions[i * 3 + 2].children[0].attribs.href;             //Link
+            var place = otherDescriptions[i * 3 + 2].children[0].children[0].data;          //Sted
+            var address = otherDescriptions[i * 3 + 2].children[1].data;                    //Adresse
     
-        request.post(options, (err, res, body) => {
-            if (err) {
-                return console.log(err);
+            //Setting up date format
+            var dateYear = dateOf.slice(dateOf.length - 4, dateOf.length);
+            var dateMonth = getMonth(dateOf.slice(dateOf.indexOf(".") + 2, dateOf.indexOf(".") + 5));
+            var dateDay = dateOf.slice(dateOf.indexOf(".") - 2, dateOf.indexOf("."));
+            var properDate = new Date();
+            properDate.setFullYear(dateYear, dateMonth, dateDay);
+    
+            //Setting up time format
+            if (timeOf !== null) {
+                var timeOf = timeOf.slice(2, timeOf.length);
+                var timeTo = 0;
+                var timeFrom = 0;
+                if (timeOf.indexOf("-") !== -1) {
+                    timeFrom = timeOf.slice(timeOf.indexOf(".") + 2, timeOf.indexOf("-")).replace(".", "");
+                    timeTo = timeOf.slice(timeOf.indexOf("-") + 1, timeOf.length - 1).replace(".", "");
+                    timeFrom.length < 3 ? timeFrom += "00" : null;
+                    timeTo.length < 3 ? timeTo += "00" : null;
+                    console.log(timeFrom)
+                    console.log(timeTo)
+                }
             }
-            console.log(`Status: ${res.statusCode}`);
-            console.log(body);
-        });
-    }
-    */
-
-
-
-        var data = JSON.stringify({
-            title: 'placeplace',
-            address: 'someplace',
-            startday: 111111,
-            starttime: 1111111,
-            description: 'somewhere',
-            place: 'tothe left'
-        })
-        const options = {
-            hostname: 'manbearpig.dk',
-            port: 443,
-            path: '/api/Event/create',
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Content-Length': data.length
+    
+    
+            //Setting up address format
+            var address = address.slice(2, address.length);
+    
+            //Set up a json element with the values in them, then throw them on to "postToApi"
+    
+            console.log("-------- New event ---------");
+    
+            let eventFull = {
+                "title": title,
+                "address": address,
+                "dateof": dateOf,
+                "timeFrom": timeFrom,
+                "description": desc,
+                "place": place,
+                "link": linkOf
             }
+                * /
+            //for(var i = 0; i < 10; i++){
+            //setTimeout(postToApi, 800*i);
+            //}
         }
+    
+        function postToApi(event) {
+            /*
+            const options = {
+                url: 'https://manbearpig.dk/api/Event/create',
+                json: true,
+                body: {
+                    title: event.title,
+                    address: event.address,
+                    startday: 111111,
+                    starttime: 1111111,
+                    description: event.desc,
+                    place: event.place
+                }
+            };
+        
+            request.post(options, (err, res, body) => {
+                if (err) {
+                    return console.log(err);
+                }
+                console.log(`Status: ${res.statusCode}`);
+                console.log(body);
+            });
+        }
+        */
 
-        const req = https.request(options, (res) => {
-            console.log(`statuscode: ${res.statusCode}`)
-            res.on('data', (d) => {
-                process.stdout.write(d)
-            })
+    var data = JSON.stringify({
+        title: 'placeplace',
+        address: 'someplace',
+        startday: 111111,
+        starttime: 1111111,
+        description: 'somewhere',
+        place: 'tothe left'
+    })
+    const options = {
+        hostname: 'manbearpig.dk',
+        port: 443,
+        path: '/api/Event/create',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': data.length
+        }
+    }
+    console.log(eventTitle[0]);
+    //sendToDB(options, data);
+}
+
+function sendToDB(options, data) {
+    const req = https.request(options, (res) => {
+        console.log(`statuscode: ${res.statusCode}`)
+        res.on('data', (d) => {
+            process.stdout.write(d)
         })
-        req.on('error', (error) => {
-            console.error(error)
-        })
+    })
+    req.on('error', (error) => {
+        console.error(error)
+    })
 
-        req.write(data)
-        req.end()
+    req.write(data)
+    req.end()
+}
+
+
+/*
+Alt skrevet herunder er noget grundlæggende vi ville have brugt til at imødekomme side ændringer i scraperens mål.
+*/
+
+function estimateNewHtml($) {
+    let possibleTitles = $('*');
+    let newLength = possibleTitles.length;
+    let addressArray = [];
+    //console.log(possibleTitles[0])
+    for (var i = 0; i < newLength; i++) {
+        recursiveSearch(possibleTitles[i], addressArray);
     }
+}
 
-
-    /*
-    Alt skrevet herunder er noget grundlæggende vi ville have brugt til at imødekomme side ændringer i scraperens mål.
-    */
-
-    function estimateNewHtml($) {
-        let possibleTitles = $('*');
-        let newLength = possibleTitles.length;
-        let addressArray = [];
-        //console.log(possibleTitles[0])
-        for (var i = 0; i < newLength; i++) {
-            recursiveSearch(possibleTitles[i], addressArray);
-        }
+//Recursive function to search through all html tags
+function recursiveSearch($, addressArray) {
+    if (typeof $.name !== 'undefined') {
+        console.log('Nest: ' + $.name + ' class: ' + $.type)
     }
-
-    //Recursive function to search through all html tags
-    function recursiveSearch($, addressArray) {
-        if (typeof $.name !== 'undefined') {
-            console.log('Nest: ' + $.name + ' class: ' + $.type)
-        }
-        if (typeof $.data !== 'undefined' && deleteNonText($.data) !== "") {
-            console.log($.data.replace(/\n/g, "").replace(/\s\s/g, ""));
-            //Here we'd look at the data of the object, and determine if it fits within a catagory(a link, a date, a title, an address, or a description).
-            //We'd then store the address array, and if several hits has a similiar address array, that'd be the new address of the particular catagory.
-        }
-        if (objectHasChildren($)) {
-            for (var i = 0; i < $.children.length; i++) {
-                recursiveSearch($.children[i]);
-            }
-            console.log('cd nest')
-        }
+    if (typeof $.data !== 'undefined' && deleteNonText($.data) !== "") {
+        console.log($.data.replace(/\n/g, "").replace(/\s\s/g, ""));
+        //Here we'd look at the data of the object, and determine if it fits within a catagory(a link, a date, a title, an address, or a description).
+        //We'd then store the address array, and if several hits has a similiar address array, that'd be the new address of the particular catagory.
     }
-
-
-    function objectHasChildren(htmlTag) {
-        if (htmlTag.children) {
-            return true;
+    if (objectHasChildren($)) {
+        for (var i = 0; i < $.children.length; i++) {
+            recursiveSearch($.children[i]);
         }
+        console.log('cd nest')
     }
+}
 
-    function deleteNonText(text) {
-        return text.replace(/\n/g, "").replace(/\s/g, "");
+
+function objectHasChildren(htmlTag) {
+    if (htmlTag.children) {
+        return true;
     }
+}
+
+function deleteNonText(text) {
+    return text.replace(/\n/g, "").replace(/\s/g, "");
+}
 
 /*
 var eventDescriptions = $('h3[class="event-title"]');                                                       Giver et objekt med nogle beskrivelser, lave [n] for at få dem seperat. 0 indekseret.
