@@ -128,59 +128,20 @@ function searchForWord($) {
                 }
             }
     
-    
             //Setting up address format
             var address = address.slice(2, address.length);
     
             //Set up a json element with the values in them, then throw them on to "postToApi"
     
             console.log("-------- New event ---------");
-    
-            let eventFull = {
-                "title": title,
-                "address": address,
-                "dateof": dateOf,
-                "timeFrom": timeFrom,
-                "description": desc,
-                "place": place,
-                "link": linkOf
-            }
-                * /
-            //for(var i = 0; i < 10; i++){
-            //setTimeout(postToApi, 800*i);
-            //}
-        }
-    
-        function postToApi(event) {
-            /*
-            const options = {
-                url: 'https://manbearpig.dk/api/Event/create',
-                json: true,
-                body: {
-                    title: event.title,
-                    address: event.address,
-                    startday: 111111,
-                    starttime: 1111111,
-                    description: event.desc,
-                    place: event.place
-                }
-            };
-        
-            request.post(options, (err, res, body) => {
-                if (err) {
-                    return console.log(err);
-                }
-                console.log(`Status: ${res.statusCode}`);
-                console.log(body);
-            });
-        }
+
         */
 
     var data = JSON.stringify({
-        title: 'placeplace',
+        title: titleArray[0],
         address: 'someplace',
-        startday: 111111,
-        starttime: 1111111,
+        startday: 222222,
+        starttime: 222222,
         description: 'somewhere',
         place: 'tothe left'
     })
